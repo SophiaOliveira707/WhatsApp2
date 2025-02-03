@@ -1,0 +1,22 @@
+{
+  "name": "whatsapp2",
+  "version": "0.1.0",
+  "description": "projeto de Daniel e Marçal",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SophiaOliveira707/WhatsApp2.git"
+  },
+  "author": "Sophia e Luis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SophiaOliveira707/WhatsApp2/issues"
+  },
+  "homepage": "https://github.com/SophiaOliveira707/WhatsApp2#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
