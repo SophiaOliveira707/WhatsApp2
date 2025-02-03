@@ -2,9 +2,9 @@
   "name": "whatsapp2",
   "version": "0.1.0",
   "description": "projeto de Daniel e Marçal",
-  "main": "index.js",
+  "main": "private/server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node private/server.js"
   },
   "repository": {
     "type": "git",
