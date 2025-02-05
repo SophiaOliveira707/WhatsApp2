@@ -4,7 +4,7 @@
   "description": "projeto de Daniel e Marçal",
   "main": "private/server.js",
   "scripts": {
-    "start": "node private/server.js"
+    "start": "nodemon private/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/SophiaOliveira707/WhatsApp2#readme",
   "dependencies": {
-    "express": "^4.21.2"
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
   }
 }
