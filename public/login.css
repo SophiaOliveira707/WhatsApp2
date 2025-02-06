@@ -12,3 +12,8 @@ main {
     width: 200px;
     gap: 8px;
 }
+
+p {
+    color: red;
+    text-align: center;
+}
