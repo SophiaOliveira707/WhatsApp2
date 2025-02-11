@@ -4,7 +4,8 @@
   "description": "projeto de Daniel e Marçal",
   "main": "private/server.js",
   "scripts": {
-    "start": "nodemon private/server.js"
+    "start": "nodemon private/server.js",
+    "dbTest": "node private/services/dbConnection.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "pg": "^8.13.2",
+    "sequelize": "^6.37.5"
   }
 }

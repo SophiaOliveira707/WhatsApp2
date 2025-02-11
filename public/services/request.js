@@ -1,4 +1,4 @@
-const ip = '10.88.1.85';
+const ip = '10.88.2.72';
 
 export async function request(route,data){
     const url = 'http://' + ip + route;
