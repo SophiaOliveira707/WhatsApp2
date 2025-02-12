@@ -1,7 +1,5 @@
-const ip = '10.88.2.72';
-
 export async function request(route,data){
-    const url = 'http://' + ip + route;
+    const url = window.location.origin + route;
     const response = await fetch(url,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

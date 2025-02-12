@@ -5,7 +5,7 @@
   "main": "private/server.js",
   "scripts": {
     "start": "nodemon private/server.js",
-    "dbTest": "node private/services/dbConnection.js"
+    "dbSeed": "node private/scripts/dbSeed.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/SophiaOliveira707/WhatsApp2#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "nodemon": "^3.1.9",
     "pg": "^8.13.2",
