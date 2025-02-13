@@ -17,6 +17,7 @@ main {
     background-color:rgb(38, 38, 101);
     padding: 32px;
     border-radius: 20px;
+    z-index: 10;
 }
 
 h1{
@@ -58,3 +59,40 @@ button:hover{
     color: red;
     text-align: center;
 }
+
+.stars {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.star {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: twinkle 2s infinite alternate;
+    opacity: 0.8;
+}
+
+.star.small { width: 10px; height: 10px; background-image: url('./assets/imgs/star.png'); }
+.star.medium { width: 20px; height: 20px; background-image: url('./assets/imgs/star.png'); }
+.star.large { width: 30px; height: 30px; background-image: url('./assets/imgs/star.png'); }
+
+@keyframes twinkle {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+.star:nth-child(1) { top: 10%; left: 20%; }
+.star:nth-child(2) { top: 40%; left: 70%; }
+.star:nth-child(3) { top: 80%; left: 50%; }
+.star:nth-child(4) { top: 25%; left: 60%; }
+.star:nth-child(5) { top: 60%; left: 10%; }
+.star:nth-child(6) { top: 55%; left: 80%; }
+.star:nth-child(7) { top: 5%; left: 90%; }
+.star:nth-child(8) { top: 90%; left: 30%; }
+.star:nth-child(9) { top: 15%; left: 5%; }
+.star:nth-child(10) { top: 50%; left: 22%; }
+.star:nth-child(11) { top: 85%; left: 12%; }
