@@ -11,15 +11,15 @@ server.use(cors());//Usa a política CORS para permitir que o usuário receba os
 server.use(express.json());//Permite que o servidor leia jsons de clientes
 
 server.get('/', (req, res) => {//Retorna a pagina inicial ao acessar rota raiz
-  res.status(200).sendFile(path.join(__dirname,'..','public','login.html'));
+  res.status(200).sendFile(path.join(__dirname,'..','public','views','login','login.html'));
 });
 
 server.get('/register', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname,'..','public','register.html'));
+  res.status(200).sendFile(path.join(__dirname,'..','public','views','register','register.html'));
 });
 
 server.get('/chat', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname,'..','public','chat.html'));
+  res.status(200).sendFile(path.join(__dirname,'..','public','views','chat','chat.html'));
 });
 
 server.post('/login', async (req, res) => {

@@ -85,9 +85,9 @@ a:hover{
     opacity: 0.8;
 }
 
-.star.small { width: 10px; height: 10px; background-image: url('./assets/imgs/star.png'); }
-.star.medium { width: 20px; height: 20px; background-image: url('./assets/imgs/star.png'); }
-.star.large { width: 30px; height: 30px; background-image: url('./assets/imgs/star.png'); }
+.star.small { width: 10px; height: 10px; background-image: url('../../assets/imgs/star.png'); }
+.star.medium { width: 20px; height: 20px; background-image: url('../../assets/imgs/star.png'); }
+.star.large { width: 30px; height: 30px; background-image: url('../../assets/imgs/star.png'); }
 
 @keyframes twinkle {
     0% { opacity: 0.6; transform: scale(1); }
