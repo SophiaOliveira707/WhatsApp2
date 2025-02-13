@@ -12,7 +12,9 @@ loginButton.addEventListener('click', async () => {
 
     const response = await request('/login',{ username: username.value, password: password.value, createAccount: window.location.href.includes('register') });
     if(response.status == 200){
-        window.location = 'chat';
+        sessionStorage.setItem('username',username.value);
+        sessionStorage.setItem('password',password.value);
+        window.location = response.data.page;
     }else{
         warning.innerHTML = response.data.message;
     }
