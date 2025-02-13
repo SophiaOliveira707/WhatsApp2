@@ -22,6 +22,10 @@ server.get('/chat', (req, res) => {
   res.status(200).sendFile(path.join(__dirname,'..','public','views','chat','chat.html'));
 });
 
+server.get('/admin', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname,'..','public','views','admin','admin.html'));
+});
+
 server.post('/login', async (req, res) => {
   const { username, password, createAccount } = req.body;//Dados enviados pelo usuário
 
