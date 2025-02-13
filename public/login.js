@@ -10,7 +10,7 @@ loginButton.addEventListener('click', async () => {
         return warning.innerHTML = 'Usuário ou senha em branco';
     }
 
-    const response = await request('/login',{ username: username.value, password: password.value });
+    const response = await request('/login',{ username: username.value, password: password.value, createAccount: window.location.href.includes('register') });
     if(response.status == 200){
         window.location = 'chat';
     }else{

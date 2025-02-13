@@ -52,7 +52,16 @@ button{
 }
 
 button:hover{
-    background-color:  rgb(92, 92, 186);;
+    background-color:  rgb(92, 92, 186);
+}
+
+a{
+    color: rgb(160, 160, 220);
+    text-decoration: none;
+    transition: all 200ms ease-in-out;
+}
+a:hover{
+    color: rgb(92, 92, 186);
 }
 
 #warning {
