@@ -28,7 +28,7 @@ server.post('/login', async (req, res) => {
   if(login != null){
     res.status(200).send({ userId: login.dataValues.id });
   }else{
-    res.status(401).send({ message: 'sai daqui pobre' });
+    res.status(401).send({ message: 'Usuário ou senha incorretos' });
   }
 });
 
