@@ -14,6 +14,6 @@ loginButton.addEventListener('click', async () => {
     if(response.status == 200){
         window.location = 'chat';
     }else{
-        warning.innerHTML = response.message;
+        warning.innerHTML = response.data.message;
     }
 });
