@@ -40,7 +40,7 @@ server.post('/login', async (req, res) => {
       const newUser = await dbConnection.models.Usuarios.create({ nome: username, senha: password });
       res.status(200).send({ page });
     }else{
-      res.status(401).send({ message: 'Nome de usuário já existe' });
+      res.status(400).send({ message: 'Nome de usuário já existe' });
     }
   }else{
     const login = await dbConnection.models.Usuarios.findOne({
@@ -55,18 +55,55 @@ server.post('/login', async (req, res) => {
   }
 });
 
-server.post('/getUsers', async (req, res) => {
-  const { username, password } = req.body;
-
-  const adminUser = await dbConnection.models.Usuarios.findOne({
-    where: { nome: 'Admin' }
+async function checkPermission(username, password, targetUserId){
+  const user = await dbConnection.models.Usuarios.findOne({
+    where: { nome: username, senha: password }
   });
 
-  if(username == 'Admin' && password == adminUser.dataValues.senha){
+  const targetUser = await dbConnection.models.Usuarios.findOne({
+    where: { id: targetUserId }
+  });
+
+  if(user == targetUser || user.dataValues.nome == 'Admin'){
+    return true;
+  }
+
+  return false;
+}
+
+server.post('/getUsers', async (req, res) => {
+  const { username, password } = req.body;
+  const permission = await checkPermission(username, password, 1);//Permissão para mexer no Admin (id = 1)
+  
+  if(permission){
     const allUsers = await dbConnection.models.Usuarios.findAll();
     res.status(200).json(allUsers);
   }else{
     res.status(401).send({ message: 'Credenciais incorretas' });
+  }
+});
+
+server.post('/editUser', async (req, res) => {
+  const { username, password, targetUserId } = req.body;
+  const permission = await checkPermission(username,password,targetUserId);
+  if(permission){
+    res.status(200).send({ page: 'página de edição de usuário' });
+  }else{
+    res.status(401).send({ message: 'Credenciais Inválidas' });
+  }
+});
+
+server.post('/deleteUser', async (req, res) => {
+  const { username, password, targetUserId } = req.body;
+  const permission = await checkPermission(username,password,targetUserId);
+  if(permission){
+    const user = await dbConnection.models.Usuarios.findOne({
+      where: { id: targetUserId }
+    });
+    await user.destroy();
+    res.status(200).send({ message: 'Usuário apagado com sucesso' });
+  }else{
+    res.status(401).send({ message: 'Credenciais Inválidas' });
   }
 });
 

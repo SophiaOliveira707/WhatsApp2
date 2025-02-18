@@ -44,3 +44,7 @@ main{
     width: 20px;
     height: 20px;
 }
+
+.trash-img {
+    filter: invert() brightness(0.4);
+}
