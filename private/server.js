@@ -55,8 +55,19 @@ server.post('/login', async (req, res) => {
   }
 });
 
-server.post('/getUser', async (req, res) => {
+server.post('/getUsers', async (req, res) => {
   const { username, password } = req.body;
+
+  const adminUser = await dbConnection.models.Usuarios.findOne({
+    where: { nome: 'Admin' }
+  });
+
+  if(username == 'Admin' && password == adminUser.dataValues.senha){
+    const allUsers = await dbConnection.models.Usuarios.findAll();
+    res.status(200).json(allUsers);
+  }else{
+    res.status(401).send({ message: 'Credenciais incorretas' });
+  }
 });
 
 server.listen(port, () => {//Servidor ouvindo na porta 80 (padrão do navegador)
