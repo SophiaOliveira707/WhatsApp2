@@ -8,6 +8,10 @@ async function checkPermission(username, password, targetUserId){
     const targetUser = await dbConnection.models.Usuarios.findOne({
         where: { id: targetUserId }
     });
+
+    if(user == null || targetUser == null){
+        return false;
+    }
   
     if(user == targetUser || user.dataValues.nome == 'Admin'){
         return true;

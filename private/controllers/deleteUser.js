@@ -6,7 +6,7 @@ async function deleteUser(req, res){
     const permission = await checkPermission(username,password,targetUserId);
     if(permission){
         const user = await dbConnection.models.Usuarios.findOne({
-        where: { id: targetUserId }
+            where: { id: targetUserId }
         });
         await user.destroy();
         res.status(200).send({ message: 'Usuário apagado com sucesso' });
