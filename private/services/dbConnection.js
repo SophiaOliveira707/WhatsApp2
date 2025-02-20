@@ -18,15 +18,15 @@ const usuarios = dbConnection.define('Usuarios',{
     senha: { type: DataTypes.STRING(25), allowNull: false }
 },{ timestamps: false });
 
+const grupos = dbConnection.define('Grupos',{
+    nome: { type: DataTypes.STRING(25), allowNull: false }
+},{ timestamps: false });
+
 const mensagens = dbConnection.define('Mensagens',{
     id_remetente: { type: DataTypes.INTEGER, references: { key: 'id', model: usuarios }, allowNull: false },
     id_destinatario: { type: DataTypes.INTEGER, references: { key: 'id', model: usuarios } },
     id_grupo: { type: DataTypes.INTEGER, references: { key: 'id', model: grupos } },
     conteudo: { type: DataTypes.STRING(280), allowNull: false }
-},{ timestamps: false });
-
-const grupos = dbConnection.define('Grupos',{
-    nome: { type: DataTypes.STRING(25), allowNull: false }
 },{ timestamps: false });
 
 const membros = dbConnection.define('Membros',{
