@@ -3,13 +3,16 @@ const checkPermission = require('../services/checkPermission');
 
 async function getUsers(req, res){
     const { username, password } = req.body;
-    const permission = await checkPermission(username, password, 1);//Permissão para mexer no Admin (id = 1)
+    const admin = await checkPermission(username, password, 1);//Permissão para mexer no Admin (id = 1)
     
-    if(permission){
+    if(admin){
         const allUsers = await dbConnection.models.Usuarios.findAll();
         res.status(200).json(allUsers);
     }else{
-        res.status(401).send({ message: 'Credenciais incorretas' });
+        const allUsersNoPassword = await dbConnection.models.Usuarios.findAll({
+            attributes: ['id','nome'],
+        });
+        res.status(200).send(allUsersNoPassword.filter(user => user.nome != 'Admin' && user.nome != username));
     }
 }
 

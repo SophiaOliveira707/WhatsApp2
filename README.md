@@ -32,8 +32,9 @@ explicação das escolhar de organização que fizemos
 
 ## Área Dev (ignorar)
 
-> [!NOTE]  
-> Lembrar de usar .env
+Apresentação:
+tecnologias, estrutura do bd (relacionamentos), proposta, telas e funcionalidades
+vídeo do programa funcionando
 
 ### Comandos GIT
 - Clonar repositório `git clone <link>`

@@ -2,6 +2,7 @@ const login = require('./controllers/login');
 const getUsers = require('./controllers/getUsers');
 const editUser = require('./controllers/editUser');
 const deleteUser = require('./controllers/deleteUser');
+const getMessages = require('./controllers/getMessages');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -51,6 +52,7 @@ class Server{
         this.server.post('/getUsers', getUsers);
         this.server.post('/editUser', editUser);
         this.server.post('/deleteUser', deleteUser);
+        this.server.post('/getMessages', getMessages);
     }
 
     run(){
