@@ -20,8 +20,9 @@ const usuarios = dbConnection.define('Usuarios',{
 
 const mensagens = dbConnection.define('Mensagens',{
     id_remetente: { type: DataTypes.INTEGER, references: { key: 'id', model: usuarios }, allowNull: false },
-    id_destinatario: { type: DataTypes.INTEGER, references: { key: 'id', model: usuarios }, allowNull: false },
-    mensagem: { type: DataTypes.STRING(280), allowNull: false }
+    id_destinatario: { type: DataTypes.INTEGER, references: { key: 'id', model: usuarios } },
+    id_grupo: { type: DataTypes.INTEGER, references: { key: 'id', model: grupos } },
+    conteudo: { type: DataTypes.STRING(280), allowNull: false }
 },{ timestamps: false });
 
 const grupos = dbConnection.define('Grupos',{
@@ -31,12 +32,6 @@ const grupos = dbConnection.define('Grupos',{
 const membros = dbConnection.define('Membros',{
     id_usuario: { type: DataTypes.INTEGER, references: { key: 'id', model: usuarios }, allowNull: false },
     id_grupo: { type: DataTypes.INTEGER, references: {key: 'id', model: grupos}, allowNull: false }
-},{ timestamps: false });
-
-const mensagensGrupos = dbConnection.define('MensagensGrupos',{
-    id_remetente: { type: DataTypes.INTEGER, references: { key: 'id', model: usuarios }, allowNull: false },
-    id_grupo: { type: DataTypes.INTEGER, references: {key: 'id', model: grupos}, allowNull: false },
-    mensagem: { type: DataTypes.STRING(280), allowNull: false }
 },{ timestamps: false });
 
 dbConnection.sync({ force: false, logging: false });
