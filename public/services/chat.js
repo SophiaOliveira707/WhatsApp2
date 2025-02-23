@@ -103,7 +103,8 @@ export class Chat{
         div.appendChild(img);
         div.appendChild(p);
 
-        document.getElementById('users').appendChild(div);
+        const users = document.getElementById('users');
+        users.insertBefore(div,users.children[1]);
         div.addEventListener('click',() => {
             this.show(contact);
             this.contact = { id: contact.id, name: contact.name, type };

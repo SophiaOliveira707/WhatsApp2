@@ -26,8 +26,7 @@ aside > header{
 
 aside > #users{
     display: flex;
-    flex-direction: column-reverse;
-    justify-content: flex-end;
+    flex-direction: column;
     height: calc(100vh - 66.4px);
     overflow-y: scroll;
     margin-right: 4px;
