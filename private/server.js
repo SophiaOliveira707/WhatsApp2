@@ -1,8 +1,7 @@
-const login = require('./controllers/login');
-const getUsers = require('./controllers/getUsers');
-const editUser = require('./controllers/editUser');
-const deleteUser = require('./controllers/deleteUser');
-const getMessages = require('./controllers/getMessages');
+const { login } = require('./controllers/login');
+const { getUsers, editUser, deleteUser } = require('./controllers/users');
+const { getMessages, sendMessage } = require('./controllers/messages');
+const { getGroups } = require('./controllers/groups');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -41,18 +40,16 @@ class Server{
         this.server.get('/admin', (req, res) => {
             res.status(200).sendFile(path.join(views,'admin','admin.html'));
         });
-
-        this.server.get('/edit', (req, res) => {
-            res.status(200).sendFile(path.join(views,'edit','editusuarios.html'));
-        });
     }
 
     serverRoutes(){
         this.server.post('/login', login);
         this.server.post('/getUsers', getUsers);
         this.server.post('/editUser', editUser);
+        this.server.post('/getGroups', getGroups);
         this.server.post('/deleteUser', deleteUser);
         this.server.post('/getMessages', getMessages);
+        this.server.post('/sendMessage', sendMessage);
     }
 
     run(){

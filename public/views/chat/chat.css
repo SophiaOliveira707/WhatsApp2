@@ -4,6 +4,7 @@ img{
 }
 
 body{
+    background-color: rgb(172, 148, 195);
     display: flex;
     overflow: hidden;
     margin: 0;
@@ -25,7 +26,8 @@ aside > header{
 
 aside > #users{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
     height: calc(100vh - 66.4px);
     overflow-y: scroll;
     margin-right: 4px;
@@ -37,10 +39,11 @@ aside > #users > .user{
     padding: 8px;
     gap: 8px;
     border-bottom: 1px solid black;
+    order: -1;
 }
 
 main{
-    display: flex;
+    display: none;
     flex-direction: column;
     flex: 1;
 }

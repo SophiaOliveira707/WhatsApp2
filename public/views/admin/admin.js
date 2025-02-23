@@ -4,7 +4,7 @@ const username = sessionStorage.getItem('username');
 const password = sessionStorage.getItem('password');
 
 async function showUsers(){
-    const users = await request('/getUsers',{ username: username, password: password });
+    const users = await request('/getUsers',{ username, password });
     
     if(users.status == 200){
         users.data.forEach((user) => {
@@ -12,12 +12,12 @@ async function showUsers(){
             div.className = 'user';
 
             const img = document.createElement('img');
-            img.src = 'assets/imgs/fotodeusuario.jpeg';
+            img.src = user.img;
             div.appendChild(img);
 
             const p = document.createElement('p');
             p.className = 'username';
-            p.innerText = user.nome;
+            p.innerText = user.name;
             div.appendChild(p);
 
             const editButton = document.createElement('button');
@@ -27,10 +27,7 @@ async function showUsers(){
             div.appendChild(editButton);
 
             editButton.addEventListener('click', async () => {
-                const editPage = await request('/editUser',{ username: username, password: password, targetUserId: user.id });
-                if(editPage.status == 200){
-                    console.log('redirecionar para página de edição do usuário');
-                }
+                console.log('inacabado');
             });
 
             const trashButton = document.createElement('button');
@@ -41,9 +38,8 @@ async function showUsers(){
             div.appendChild(trashButton);
 
             trashButton.addEventListener('click', async () => {
-                const deleteUser = await request('/deleteUser',{ username: username, password: password, targetUserId: user.id });
+                const deleteUser = await request('/deleteUser',{ username: username, password: password, id: user.id });
                 if(deleteUser.status == 200){
-                    console.log('usuário apagado com sucesso');
                     div.remove();
                 }
             });
