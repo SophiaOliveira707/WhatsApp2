@@ -50,7 +50,7 @@ async function sendMessage(req, res){
             try{
                 const dest = contact.type == 'user' ? contact.id : null;
                 const group = contact.type == 'group' ? contact.id : null;
-                const message = await messages.create({ id_remetente: user.id, id_destinatario: dest, id_grupo: group, conteudo: content });
+                const message = await messages.create({ id_remetente: user.id, id_destinatario: dest, id_grupo: group, conteudo: content }, { logging: false });
                 res.status(200).send({ id: message.dataValues.id });
             }catch(error){
                 res.status(400).send({ message: 'Erro ao enviar mensagem' });

@@ -8,14 +8,42 @@ setInterval(() => {//Atualiza o chat a cada 1000ms = 1 segundo
     chat.update();
 },1000);
 
-document.getElementById('send').addEventListener('click',() => {
-    const input = document.querySelector('input');
-    chat.sendMessage(input.value);
-});
+const input = document.querySelector('input');
+const sendButton = document.getElementById('send');
 
-document.querySelector('input').addEventListener('keypress',(e) => {
-    if(e.key == 'Enter'){
-        const input = document.querySelector('input');
+input.addEventListener('keypress',(e) => {
+    if(e.key == 'Enter' && input.value != ''){
         chat.sendMessage(input.value);
     }
+});
+
+sendButton.addEventListener('click',() => {
+    if(input.value != ''){
+        chat.sendMessage(input.value);
+    }
+});
+
+const aside = document.querySelector('aside');
+const messages = document.getElementById('messages');
+
+function resize(){
+    if(window.innerWidth < 760){//Caso a tela seja pequena, ou exibe os contatos ou as mensagens
+        aside.style.display = chat.contact.id ? 'none' : 'flex';
+        messages.style.display = chat.contact.id ? 'flex' : 'none';
+    }else{//Caso a tela seja grande o suficiente, exibe os dois
+        aside.style.display = 'flex';
+        messages.style.display = 'flex'
+    }
+}
+
+resize();
+window.addEventListener('resize',resize);
+
+const quitChat = document.getElementById('quit-chat');
+const main = document.querySelector('main');
+
+quitChat.addEventListener('click',() => {
+    chat.contact = {};
+    aside.style.display = 'flex';
+    main.style.display = 'none'
 });

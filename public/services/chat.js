@@ -1,5 +1,12 @@
 import { request } from './request.js';
 
+const chatUsername = document.getElementById('chat-username');
+const chatImage = document.getElementById('chat-img');
+const messages = document.getElementById('messages');
+const users = document.getElementById('users');
+const input = document.querySelector('input');
+const main = document.querySelector('main');
+
 export class Chat{
     constructor(username,password){
         this.username = username;
@@ -37,50 +44,56 @@ export class Chat{
         });
     }
 
-    sendMessage(content){
+    sendMessage(content){//Envia mensagens para o contato aberto (grupo ou usuário)
         const { username, password, contact } = this;
 
         request('/sendMessage',{ username, password, contact, content }).then((message) => {
             if(message.status == 200){
-                message = {
+                input.value = '';
+                this.addMessage({
                     id: message.data.id,
                     owner: this.username,
                     receiver: this.contact.type == 'user' ? this.contact.name : null,
                     group: this.contact.type == 'group' ? this.contact.name : null,
                     content: content
-                }
-                this.addMessage(message);
-                this.createMessage(message);
-                document.querySelector('input').value = '';
+                });
             }
         });
     }
 
-    addUser(user){
+    addUser(user){//Adiciona um usuário e cria seu contato
         if(!this.users[user.id]){//Ignora usuários que já existem
             this.users[user.id] = user;//Adiciona usuário na lista de usuários
             this.createContact(user,'user');
         }
     }
 
-    addGroup(group){//Mesmo design dos usuários só que com um botão a mais
+    addGroup(group){//Adiciona um grupo e cria seu contato
         if(!this.groups[group.id]){//Ignora grupos que já existem
             this.groups[group.id] = group;//Adiciona grupo na lista de grupos
             this.createContact(group,'group');
         }
     }
 
-    addMessage(message){
+    addMessage(message){//Adiciona uma mensagem mas só exibe ela caso o contato esteja aberto
         if(!this.messages[message.id]){//Ignora mensagens que já existem
             this.messages[message.id] = message;//Adiciona mensagem na lista de mensagens
+            if(this.contact.type == 'group'){
+                if(this.contact.name == message.group){
+                    this.createMessage(message);
+                }
+            }else if(this.contact.name == message.owner || this.contact.name == message.receiver){
+                this.createMessage(message);
+            }
         }
     }
 
-    show(chat){
-        document.getElementById('chat-username').innerHTML = chat.name;
-        document.getElementById('chat-img').src = chat.img;
-        document.getElementById('messages').innerHTML = '';
-        document.querySelector('main').style.display = 'flex';
+    show(chat){//Exibe as mensagens de um nome de contato específico
+        window.dispatchEvent(new Event('resize'));
+        chatUsername.innerHTML = chat.name;
+        chatImage.src = chat.img;
+        messages.innerHTML = '';
+        main.style.display = 'flex';
         Object.values(this.messages).forEach((message) => {
             if(message.group == null && message.owner == chat.name || message.receiver == chat.name){
                 this.createMessage(message);
@@ -90,7 +103,7 @@ export class Chat{
         });
     }
 
-    createContact(contact,type){
+    createContact(contact,type){//Cria o elemento do contato (ao clicar, exibe as mensagens do contato)
         const div = document.createElement('div');
         div.className = 'user';
 
@@ -103,12 +116,16 @@ export class Chat{
         div.appendChild(img);
         div.appendChild(p);
 
-        const users = document.getElementById('users');
-        users.insertBefore(div,users.children[1]);
         div.addEventListener('click',() => {
-            this.show(contact);
             this.contact = { id: contact.id, name: contact.name, type };
+            this.show(contact);
         });
+
+        if(type == 'group'){//Adiciona novos grupos no primeiro lugar dos contatos
+            users.insertBefore(div,users.children[0]);
+        }else{//Adiciona novos usuários depois dos grupos
+            users.insertBefore(div,users.children[Object.keys(this.groups).length]);
+        }
 
         // <div class="user">
         //     <img src="assets/imgs/fotodeusuario.jpeg">
@@ -116,7 +133,7 @@ export class Chat{
         // </div>
     }
 
-    createMessage(message){
+    createMessage(message){//Cria uma mensagem na tela
         const div = document.createElement('div');
         div.className = message.owner == this.username ? 'message self' : 'message';
 
@@ -131,7 +148,8 @@ export class Chat{
         div.appendChild(p1);
         div.appendChild(p2);
 
-        document.getElementById('messages').appendChild(div);
+        messages.appendChild(div);
+        messages.scrollTo(0,messages.scrollHeight);//Vai para as últimas mensagens
 
         // <div class="message">
         //     <p class="username">Luis</p>

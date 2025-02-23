@@ -18,8 +18,8 @@ async function login(req, res){
     }
 
     if(createAccount){
-        const user = await users.create({ nome: username, senha: password });
-        await members.create({ id_usuario: user.dataValues.id, id_grupo: 1 });
+        const user = await users.create({ nome: username, senha: password },{ logging: false });
+        await members.create({ id_usuario: user.dataValues.id, id_grupo: 1 },{ logging: false });
     }else if(password != login.senha){
         return res.status(401).send({ message: 'Usuário ou senha incorretos' });
     }
