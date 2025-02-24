@@ -4,7 +4,7 @@ img{
 }
 
 body{
-    background-color: rgb(172, 148, 195);
+    background-color: rgb(4, 4, 44);
     display: flex;
     height: 100dvh;
     width: 100dvw;
@@ -12,14 +12,15 @@ body{
 }
 
 aside{
-    background-color: blueviolet;
+    background-color: rgb(8, 8, 60);
     display: flex;
     flex-direction: column;
     width: 400px;
+    color: rgb(228, 233, 236);
 }
 
 aside > header{
-    background-color: rgb(91, 33, 145);
+    background-color: rgb(13, 13, 78);
     display: flex;
     gap: 8px;
     padding: 8px;
@@ -38,7 +39,7 @@ aside > #users > .user{
     display: flex;
     padding: 8px;
     gap: 8px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.307);
     order: -1;
 }
 
@@ -53,11 +54,13 @@ main > header{
     align-items: center;
     gap: 8px;
     padding: 8px;
-    background-color: rgb(60, 22, 95);
+    background-color: rgb(8, 8, 57);
+    color: rgb(228, 233, 236);
 }
 
 main > header > #quit-chat {
-    filter: invert() brightness(0.4);
+    filter: invert() brightness(0.8);
+    opacity: 0.6;
     cursor: pointer;
     height: 20px;
     width: 20px;
@@ -82,6 +85,7 @@ main > #messages .message{
 main > #messages .message > p{
     margin: 0;
     max-width: 50%;
+    color: white;
 }
 
 main > #messages .message > .content{
@@ -89,6 +93,7 @@ main > #messages .message > .content{
     padding: 4px 8px;
     border-radius: 12px;
     word-break: break-word;/*Quebra de linha da mensagem*/
+    color: black;
 }
 
 main > #messages .self{
@@ -98,9 +103,9 @@ main > #messages .self{
 
 main > #write-send{
     display: flex;
-    padding: 8px;
-    gap: 8px;
-    background-color: rgb(69, 29, 106);
+    padding: 8px 16px;
+    gap: 16px;
+    align-items: center;
     height: 32px;
 }
 
@@ -110,6 +115,15 @@ main > #write-send > input{
     border: 0;
     outline: none;
     padding-left: 8px;
+    height: 28px;
+}
+
+main > #write-send > #send {
+    cursor: pointer;
+    filter: invert();
+    width: 24px;
+    height: 24px;
+    border-radius: 0;
 }
 
 ::-webkit-scrollbar {
@@ -130,3 +144,45 @@ main > #write-send > input{
         width: 100vw;
     }
 }
+.stars {
+    pointer-events: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.star {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: twinkle 2s infinite alternate;
+    opacity: 0.8;
+    z-index: 0;
+}
+
+* {
+    z-index: 1;
+}
+
+.star.small { width: 10px; height: 10px; background-image: url('../../assets/imgs/star.png'); }
+.star.medium { width: 20px; height: 20px; background-image: url('../../assets/imgs/star.png'); }
+.star.large { width: 30px; height: 30px; background-image: url('../../assets/imgs/star.png'); }
+
+@keyframes twinkle {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+.star:nth-child(1) { top: 10%; left: 30%; }
+.star:nth-child(2) { top: 40%; left: 70%; }
+.star:nth-child(3) { top: 80%; left: 50%; }
+.star:nth-child(4) { top: 25%; left: 60%; }
+.star:nth-child(5) { top: 60%; left: 35%; }
+.star:nth-child(6) { top: 55%; left: 80%; }
+.star:nth-child(7) { top: 5%; left: 90%; }
+.star:nth-child(8) { top: 90%; left: 42%; }
+.star:nth-child(9) { top: 15%; left: 38%; }
+.star:nth-child(10) { top: 50%; left: 32%; }
+.star:nth-child(11) { top: 85%; left: 56%; }
