@@ -16,7 +16,7 @@ aside{
     display: flex;
     flex-direction: column;
     width: 400px;
-    color: rgb(228, 233, 236);
+    color: rgb(168, 168, 240);
 }
 
 aside > header{
@@ -55,7 +55,7 @@ main > header{
     gap: 8px;
     padding: 8px;
     background-color: rgb(8, 8, 57);
-    color: rgb(228, 233, 236);
+    color:rgb(168, 168, 240);
 }
 
 main > header > #quit-chat {
@@ -85,7 +85,7 @@ main > #messages .message{
 main > #messages .message > p{
     margin: 0;
     max-width: 50%;
-    color: white;
+    color:rgb(168, 168, 240);
 }
 
 main > #messages .message > .content{

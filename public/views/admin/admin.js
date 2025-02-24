@@ -27,7 +27,22 @@ async function showUsers(){
             div.appendChild(editButton);
 
             editButton.addEventListener('click', async () => {
-                console.log('inacabado');
+                var p = div.querySelector('p');
+                var input = div.querySelector('input');
+
+                if(input == null){
+                    input = document.createElement('input');
+                    input.value = p.innerText;
+                    div.insertBefore(input,p);
+                    p.remove();
+                }else{
+                    p = document.createElement('p');
+                    p.classList = 'username';
+                    p.innerText = input.value;
+                    div.insertBefore(p,input);
+                    input.remove();
+                    await request('/editUser',{ username, password, id: user.id, newUsername: p.innerText });
+                }
             });
 
             const trashButton = document.createElement('button');

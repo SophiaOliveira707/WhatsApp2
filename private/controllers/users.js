@@ -18,12 +18,13 @@ async function getUsers(req, res){
 }
 
 async function editUser(req, res){
-    const { username, password, id, newUser, newPassword } = req.body;
+    const { username, password, id, newUsername } = req.body;
 
     if(isAdmin(username,password)){
         const user = await users.findOne({ where: { id }, logging: false });
         if(user){
-            //Alterar usuário aqui
+            user.nome = newUsername;
+            await user.save();
             res.status(200).send({ message: 'Usuário alterado com sucesso' });
         }else{
             res.status(404).send({ message: 'Usuário não encontrado' });
