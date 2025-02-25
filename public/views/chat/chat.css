@@ -43,6 +43,12 @@ aside > #users > .user{
     order: -1;
 }
 
+aside > #users > .user > .status {
+    color: rgb(211, 195, 90);
+    font-weight: 900;
+    display: none;
+}
+
 main{
     display: none;
     flex-direction: column;

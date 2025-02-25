@@ -12,23 +12,44 @@ Neste projeto utilizamos o protocolo **HTTP** com requisições `GET` e `POST` (
 
 ## Requisitos
 :ballot_box_with_check: Tela de login<br>
-:heavy_multiplication_x: 4 telas (Login, Perfil, Chat, Admin)<br>
-:heavy_multiplication_x: 3 tabelas (Usuario, Mensagem, Grupo, Membros e MensagemGrupo)<br>
-:heavy_multiplication_x: Relação 1-N (1 Usuário envia várias mensagens mas cada mensagem pertence a somente 1 usuário)<br>
-:heavy_multiplication_x: Select em 2 tabelas (Descobrir o nome do usuário a partir do seu id Mensagem-Usuario)<br>
-:heavy_multiplication_x: Perfil de Admin capaz de fazer um CRUD de usuários
+:ballot_box_with_check: 4 telas (Login, Register, Chat, Admin)<br>
+:ballot_box_with_check: 3 tabelas (Usuarios, Mensagens, Grupos, Membros)<br>
+:ballot_box_with_check: Relação 1-N (1 Usuário envia várias mensagens mas cada mensagem pertence a somente 1 usuário)<br>
+:heavy_multiplication_x: Select em 2 tabelas<br>
+:ballot_box_with_check: Select em 3 tabelas (Procurar mensagens de grupos em que você é membro)<br>
+:ballot_box_with_check: Perfil de Admin capaz de fazer um CRUD de usuários
 
 ## Como Executar
-explicação de como executar o programa
+1. Clonar o repositório
+2. Instalar as dependências com `npm install`
+3. Executar o script `npm run dbSeed`
+4. Executar o script `npm run start`
 
-## Banco de Dados
-explicação sobre o banco de dados
-
-## Telas
-explicação sobre as telas
+O banco de dados precisa estar criado (mesmo que vazio) e pode ser necessário trocar alguma informação do .env para conectar ao banco de dados correto.
 
 ## Organização do Projeto
-explicação das escolhar de organização que fizemos
+O projeto é separado em 2 pastas principais:
+- `private` Onde fica o backend
+- `public` Onde fica o frontend
+
+Conforme descrito no seguinte trecho de `private/server.js`:
+```js
+this.server.use(express.static(path.join(__dirname,'..','public')));
+```
+
+O servidor usa a pasta `public` de forma estática, ou seja, não existem restrições ao requisitar arquivos desta pasta, semelhante ao funcionamento do Xampp.
+
+### Private
+A pasta private possui as seguintes pastas:
+- `controllers` Definem o comportamento de cada rota do servidor
+- `services` e `utils` Guardam funções auxiliares para os controladores
+- `scripts` Guarda arquivos de execução única (como o dbSeed.js que constrói o banco de dados do zero)
+
+### Public
+A pasta public guarda as seguintes pastas:
+- `assets` Guarda imagens usadas no site
+- `views` Guarda as telas do programa (html/css/js)
+- `services` Guarda funções auxiliares para o js das telas
 
 ## Área Dev (ignorar)
 

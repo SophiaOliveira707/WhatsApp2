@@ -78,12 +78,27 @@ export class Chat{
     addMessage(message){//Adiciona uma mensagem mas só exibe ela caso o contato esteja aberto
         if(!this.messages[message.id]){//Ignora mensagens que já existem
             this.messages[message.id] = message;//Adiciona mensagem na lista de mensagens
+            
+            var status;
+            if(message.group){
+                status = document.getElementById(`group-${message.group}-status`);
+            }else if(message.owner == this.username){
+                status = document.getElementById(`user-${message.receiver}-status`);
+            }else{
+                status = document.getElementById(`user-${message.owner}-status`);
+            }
+            status.style.display = 'flex';
+
             if(this.contact.type == 'group'){
                 if(this.contact.name == message.group){
                     this.createMessage(message);
+                    status.style.display = 'none';
                 }
-            }else if(this.contact.name == message.owner || this.contact.name == message.receiver){
-                this.createMessage(message);
+            }else if(this.contact.type == 'user' && !message.group){
+                if(this.contact.name == message.owner || this.contact.name == message.receiver){
+                    this.createMessage(message);
+                    status.style.display = 'none';
+                }
             }
         }
     }
@@ -113,11 +128,18 @@ export class Chat{
         const p = document.createElement('p');
         p.innerText = contact.name;
 
+        const status = document.createElement('p');
+        status.className = 'status';
+        status.id = `${type}-${contact.name}-status`;
+        status.innerText = '!';
+
         div.appendChild(img);
         div.appendChild(p);
+        div.appendChild(status);
 
         div.addEventListener('click',() => {
             this.contact = { id: contact.id, name: contact.name, type };
+            div.querySelector('.status').style.display = 'none';
             this.show(contact);
         });
 
